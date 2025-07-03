@@ -37,27 +37,12 @@ jobs:
         with:
           python-version: 3.9
 
-      - name: Free up space in /dev/root
+      - name: Free up disk space
         run: |
-          echo "Disk usage before clean up:"
-          df -h
-          sudo rm -rf /usr/share/dotnet
           sudo rm -rf "$AGENT_TOOLSDIRECTORY"
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /opt/ghc
-          sudo rm -rf /usr/local/share/boost
-          sudo rm -rf /usr/local/lib/android
-          sudo rm -rf /usr/local/.ghcup
-          sudo rm -rf /usr/share/swift
-          sudo rm -rf /opt/hostedtoolcache/CodeQL || true
-          sudo rm -rf /opt/hostedtoolcache/Java_* || true
-          sudo rm -rf /opt/hostedtoolcache/Ruby || true
-          sudo rm -rf /opt/hostedtoolcache/PyPy || true
-          sudo rm -rf /opt/hostedtoolcache/boost || true
           docker system prune -af --volumes
           docker image prune -af
-          echo "Disk usage after clean up:"
-          df -h
+          ./.github/resources/scripts/free-disk-space.sh
 
       - name: Create KFP cluster
         id: create-kfp-cluster
