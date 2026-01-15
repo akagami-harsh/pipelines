@@ -30,7 +30,6 @@ USE_PROXY=false
 CACHE_DISABLED=false
 ARTIFACT_PROXY_ENABLED=false
 MULTI_USER=false
-
 AWF_VERSION=""
 POD_TO_POD_TLS_ENABLED=false
 SEAWEEDFS_INIT_TIMEOUT=300s
@@ -60,7 +59,6 @@ while [ "$#" -gt 0 ]; do
       ARTIFACT_PROXY_ENABLED=true
       shift
       ;;
-
     --argo-version)
       shift
       if [[ -n "$1" ]]; then
